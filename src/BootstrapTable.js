@@ -1171,7 +1171,18 @@ class BootstrapTable extends Component {
     }
     const separator = exportCSVSeparator || Const.DEFAULT_CSV_SEPARATOR;
     const keys = [];
-    this.props.children.filter(_ => _ != null).map(function(column) {
+    var columnChildren = [];
+    this.props.children.forEach(function(column) {
+        if (Array.isArray(column)) {
+          var tmpArray = React.Children.toArray(column);
+          tmpArray.forEach(function(tmpColumn) {
+            columnChildren.push(tmpColumn);
+          });
+        } else {
+          columnChildren.push(column);
+        }
+    });
+    columnChildren.filter(_ => _ != null).map(function(column) {
       if (column.props.export === true ||
         (typeof column.props.export === 'undefined' &&
         column.props.hidden === false)) {
