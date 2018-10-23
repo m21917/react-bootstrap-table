@@ -1769,7 +1769,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	      var separator = exportCSVSeparator || _Const2.default.DEFAULT_CSV_SEPARATOR;
 	      var keys = [];
-	      this.props.children.filter(function (_) {
+	      var columnChildren = [];
+	      this.props.children.forEach(function (column) {
+	        if (Array.isArray(column)) {
+	          var tmpArray = _react2.default.Children.toArray(column);
+	          tmpArray.forEach(function (tmpColumn) {
+	            columnChildren.push(tmpColumn);
+	          });
+	        } else {
+	          columnChildren.push(column);
+	        }
+	      });
+	      columnChildren.filter(function (_) {
 	        return _ != null;
 	      }).map(function (column) {
 	        if (column.props.export === true || typeof column.props.export === 'undefined' && column.props.hidden === false) {

@@ -1171,16 +1171,16 @@ class BootstrapTable extends Component {
     }
     const separator = exportCSVSeparator || Const.DEFAULT_CSV_SEPARATOR;
     const keys = [];
-    var columnChildren = [];
+    const columnChildren = [];
     this.props.children.forEach(function(column) {
-        if (Array.isArray(column)) {
-          var tmpArray = React.Children.toArray(column);
-          tmpArray.forEach(function(tmpColumn) {
-            columnChildren.push(tmpColumn);
-          });
-        } else {
-          columnChildren.push(column);
-        }
+      if (Array.isArray(column)) {
+        const tmpArray = React.Children.toArray(column);
+        tmpArray.forEach(function(tmpColumn) {
+          columnChildren.push(tmpColumn);
+        });
+      } else {
+        columnChildren.push(column);
+      }
     });
     columnChildren.filter(_ => _ != null).map(function(column) {
       if (column.props.export === true ||
