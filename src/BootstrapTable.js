@@ -1315,7 +1315,7 @@ class BootstrapTable extends Component {
       || this.props.options.toolBar) {
       let columns;
       if (Array.isArray(children)) {
-        columns = children.filter(_ => _ != null).map((column, r) => {
+        columns = React.Children.toArray(children).filter(_ => _ != null).map((column, r) => {
           if (!column) return;
           const { props } = column;
           const isKey = props.isKey || keyField === props.dataField;
